@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ClientNameForm
-from .models import Client, UserProfile
+from .models import Client, UserProfile, Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -51,9 +51,12 @@ def user_login(request):
     return render(request, 'login.html', {'form': form})
 
 
-
 @login_required
 def user_dashboard(request):
     # Display user-specific dashboard
-    return render(request, 'dashboard.html')
+    user_profile = UserProfile.objects.get(user=request.user)
+    client = user_profile.client  # Replace with your method of getting the client
+    products = Product.objects.filter(client=client)
+    context = {'products': products}
+    return render(request, 'dashboard.html', context)
 

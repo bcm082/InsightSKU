@@ -3,4 +3,43 @@
 {% block content %}
 <h1>Dashboard</h1>
 <p>Welcome to your dashboard, {{ request.user.username }}!</p>
+
+<!-- dashboard.html -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Product Type</th>
+            <th>Tags</th>
+            <th>Location</th>
+            <th>Image URL</th>
+            <th>Quantity</th>
+            <th>Weight</th>
+            <th>Weight Unit</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.sKU }}</td>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.product_type }}</td>
+            <td>{{ product.tags }}</td>
+            <td>{{ product.location }}</td>
+            <td><a href="{{ product.image_url }}">{{ product.image_url }}</a></td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.weight }}</td>
+            <td>{{ product.weight_unit }}</td>
+            <td>{{ product.created_at }}</td>
+            <td>{{ product.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
