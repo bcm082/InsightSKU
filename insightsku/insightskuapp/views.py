@@ -34,6 +34,11 @@ def user_login(request):
     if not client_name or not Client.objects.filter(client_name=client_name).exists():
         return redirect('enter_client_name')
 
+    # Check if the user was redirected to login while trying to access the dashboard
+    next_url = request.GET.get('next')
+    if next_url == '/dashboard/':
+        messages.info(request, 'Please log in to access the dashboard.')
+
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'user_login'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
