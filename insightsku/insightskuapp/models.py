@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 class Client(models.Model):
@@ -8,17 +9,14 @@ class Client(models.Model):
     def __str__(self):
         return self.client_name
 
-
-class User(models.Model):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)  # Consider using Django's built-in User model for authentication
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.username
-
+        return self.user.username
 
 class Product(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
