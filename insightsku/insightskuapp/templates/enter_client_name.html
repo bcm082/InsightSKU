@@ -1,4 +1,11 @@
+{% extends 'base.html' %}
 
+
+{% block navbar %}
+<!-- No content, effectively hides the navbar -->
+{% endblock %}
+
+{% block content %}
 <h2>Welcome to Your App</h2>
 <p>Please enter your client name to proceed.</p>
 
@@ -8,3 +15,5 @@
     <input type="text" id="client_name" name="client_name" {% if autocomplete_enabled %}autocomplete="on"{% endif %}>
     <button type="submit">Submit</button>
 </form>
+
+{% endblock %}

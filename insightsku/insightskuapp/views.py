@@ -3,6 +3,7 @@ from .forms import ClientNameForm
 from .models import Client, UserProfile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 
 def enter_client_name(request):
@@ -51,12 +52,8 @@ def user_login(request):
 
 
 
-
-
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def user_dashboard(request):
     # Display user-specific dashboard
-    pass
+    return render(request, 'dashboard.html')
 

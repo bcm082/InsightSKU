@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'insightskuapp',
 ]
 
+LOGIN_REDIRECT_URL = 'dashboard'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
