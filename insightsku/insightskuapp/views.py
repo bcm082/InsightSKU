@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import ClientNameForm
 from .models import Client, UserProfile, Product
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+
 
 
 def enter_client_name(request):
@@ -60,3 +63,8 @@ def user_dashboard(request):
     context = {'products': products}
     return render(request, 'dashboard.html', context)
 
+
+def custom_logout(request):
+    logout(request)
+    messages.success(request, 'Successfully logged out.')
+    return redirect('/')

@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from insightskuapp import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.enter_client_name, name='enter_client_name'),
     path('login/', views.user_login, name='user_login'),
     path('dashboard/', views.user_dashboard, name='dashboard'),
+    path('logout/', views.custom_logout, name='logout'),
 ]
 
 
