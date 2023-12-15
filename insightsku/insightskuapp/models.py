@@ -41,6 +41,7 @@ class Product(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     sku = models.CharField(max_length=40)
     product_name = models.CharField(max_length=255)
+    brand = models.CharField(max_length=100, blank=True)
     product_type = models.ManyToManyField(ProductType, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     location = models.CharField(max_length=255, blank=True)
