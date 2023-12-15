@@ -36,7 +36,7 @@ def user_login(request):
 
     # Check if the user was redirected to login while trying to access the dashboard
     next_url = request.GET.get('next')
-    if next_url == '/dashboard/':
+    if next_url == '/products/':
         messages.info(request, 'Please log in to access the dashboard.')
 
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def user_login(request):
                     profile = UserProfile.objects.get(user=user)
                     if profile.client.client_name == client_name:
                         login(request, user)
-                        return redirect('dashboard')
+                        return redirect('products')
                 except UserProfile.DoesNotExist:
                     form.add_error(None, "Invalid username, password, or client.")
     else:
@@ -66,7 +66,7 @@ def user_dashboard(request):
     client = user_profile.client  # Replace with your method of getting the client
     products = Product.objects.filter(client=client)
     context = {'products': products}
-    return render(request, 'dashboard.html', context)
+    return render(request, 'products.html', context)
 
 
 def custom_logout(request):
