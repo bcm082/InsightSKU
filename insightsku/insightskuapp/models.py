@@ -17,16 +17,36 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+class ProductType(models.Model):
+    type_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.type_name
+
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class ImageDetail(models.Model):
+    detail = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.detail
+
 
 class Product(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    sKU = models.CharField(max_length=100)
+    sku = models.CharField(max_length=40)
     product_name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    product_type = models.CharField(max_length=100, blank=True)
-    tags = models.TextField(blank=True)
+    product_type = models.ManyToManyField(ProductType, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     location = models.CharField(max_length=255, blank=True)
     image_url = models.URLField(blank=True)
+    image_location = models.URLField(blank=True)
+    image_details = models.ManyToManyField(ImageDetail, blank=True)
     quantity = models.IntegerField()
     weight = models.DecimalField(max_digits=10, decimal_places=3)
     weight_unit = models.CharField(max_length=50, blank=True)
@@ -35,7 +55,16 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+    
 
+
+class Price(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    marketplace = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.marketplace} - {self.price}"
 
 
 class Content(models.Model):
