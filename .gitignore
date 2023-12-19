@@ -263,3 +263,8 @@ StartupProfileData-NonInteractive
 
 # Ignore logfiles
 logfile/*
+InsightSKU/pyvenv.cfg
+InsightSKU/Scripts/activate
+InsightSKU/Scripts/activate.bat
+InsightSKU/Scripts/Activate.ps1
+InsightSKU/Scripts/deactivate.bat
