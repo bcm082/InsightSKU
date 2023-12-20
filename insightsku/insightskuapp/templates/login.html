@@ -6,12 +6,24 @@
 
 
 {% block content %}
-<h2>Login to {{ client_name }}</h2> 
+<div class="d-flex justify-content-center align-items-center" style="height: 65vh;">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <div class="mb-3">
+                    <span class="card-text">Account Name: <strong>{{ client_name }}</strong></span>
+                    <!-- Smaller Back Button Next to Account Name -->
+                    <a href="{% url 'enter_client_name' %}" class="btn btn-sm btn-secondary ml-2">Change</a>
+                </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
