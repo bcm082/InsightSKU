@@ -19,6 +19,7 @@ def enter_client_name(request):
                 return redirect('user_login')
             else:
                 # Handle case where client does not exist
+                
                 pass
     else:
         form = ClientNameForm()
@@ -56,7 +57,7 @@ def user_login(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'client_name': client_name})
 
 
 @login_required

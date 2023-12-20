@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block navbar %}
 <!-- No content, effectively hides the navbar -->
 {% endblock %}
 
 
 {% block content %}
+<h2>Login to {{ client_name }}</h2> 
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
