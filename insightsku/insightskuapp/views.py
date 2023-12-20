@@ -84,3 +84,7 @@ def product_search(request):
 def advanced_product_search(request):
     # Add your advanced search logic here
     return render(request, 'advanced_search.html')
+
+def add_product(request):
+    # Add your add product logic here
+    return render(request, 'add_product.html')
