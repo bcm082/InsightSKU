@@ -1,11 +1,64 @@
 {% extends 'base.html' %}
 
+{% load static%}
+
 {% block content %}
-<h1>Dashboard</h1>
-<p>Welcome to your dashboard, {{ request.user.username }}!</p>
+<h1>Products</h1>
+<p>Welcome, {{ request.user.username }}!</p>
+
+<!-- Search Bar -->
+<form method="get" action="{% url 'product_search' %}" class="mb-4">
+    <div class="row justify-content-left">
+        <div class="col-sm-6 col-md-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="query" placeholder="Search products...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Advanced Search Toggle Button -->
+<button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#advancedSearch" aria-expanded="false" aria-controls="advancedSearch">
+    Advanced Search
+</button>
+
+<!-- Advanced Search Form -->
+<div class="collapse" id="advancedSearch">
+    <form id="advancedSearchForm" method="get" action="{% url 'advanced_product_search' %}" class="mt-3">
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <input type="text" class="form-control" name="sku" placeholder="SKU">
+            </div>
+            <div class="col-md-3 mb-3">
+                <input type="text" class="form-control" name="asin" placeholder="ASIN">
+            </div>
+            <div class="col-md-3 mb-3">
+                <input type="text" class="form-control" name="title" placeholder="Title">
+            </div>
+            <div class="col-md-3 mb-3">
+                <input type="text" class="form-control" name="tags" placeholder="Tags">
+            </div>
+            <div class="col-md-3 mb-3">
+                <input type="date" class="form-control" name="date_start" placeholder="Date Start">
+            </div>
+            <div class="col-md-3 mb-3">
+                <input type="date" class="form-control" name="date_end" placeholder="Date End">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+        <button class="btn btn-outline-secondary ml-2" type="button" onclick="clearForm()">Clear Fields</button>
+    </form>
+</div>
+
+<br>
+<br>
 
 <!-- dashboard.html -->
-<table class="table">
+<table class="table table-bordered compact-table">
     <thead>
         <tr>
             <th>ID</th>
@@ -39,5 +92,12 @@
         {% endfor %}
     </tbody>
 </table>
+
+
+<script>
+    function clearForm() {
+        document.getElementById('advancedSearchForm').reset();
+    }
+</script>
 
 {% endblock %}

@@ -74,3 +74,13 @@ def custom_logout(request):
     logout(request)
     messages.success(request, 'Successfully logged out.')
     return redirect('/')
+
+
+def product_search(request):
+    query = request.GET.get('query', '')
+    products = Product.objects.filter(title__icontains=query)  # Adjust the filter as needed
+    return render(request, 'dashboard.html', {'products': products})
+
+def advanced_product_search(request):
+    # Add your advanced search logic here
+    return render(request, 'advanced_search.html')

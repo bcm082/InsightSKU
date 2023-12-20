@@ -27,3 +27,19 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+
+.compact-table th, .compact-table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+}
+.compact-table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+.compact-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.compact-table tr:hover {
+    background-color: #e9ecef;
+}
