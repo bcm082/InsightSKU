@@ -268,3 +268,6 @@ InsightSKU/Scripts/activate
 InsightSKU/Scripts/activate.bat
 InsightSKU/Scripts/Activate.ps1
 InsightSKU/Scripts/deactivate.bat
+InsightSKU/insightskuapp/migrations/0007_remove_product_image_details_remove_price_product_and_more.py
+InsightSKU/insightskuapp/migrations/0008_product_client.py
+InsightSKU/insightskuapp/migrations/0009_alter_product_client.py
