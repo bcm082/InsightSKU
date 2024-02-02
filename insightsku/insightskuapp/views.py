@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ClientNameForm
+from .forms import ClientNameForm, ProductForm
 from .models import Client, UserProfile, Product
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -86,5 +86,13 @@ def advanced_product_search(request):
     return render(request, 'advanced_search.html')
 
 def add_product(request):
-    # Add your add product logic here
-    return render(request, 'add_product.html')
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # You can add a success message here if needed
+            return redirect('products')  # Redirect to a product list view after adding
+    else:
+        form = ProductForm()
+
+    return render(request, 'add_product.html', {'form': form})

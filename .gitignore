@@ -271,3 +271,8 @@ InsightSKU/Scripts/deactivate.bat
 InsightSKU/insightskuapp/migrations/0007_remove_product_image_details_remove_price_product_and_more.py
 InsightSKU/insightskuapp/migrations/0008_product_client.py
 InsightSKU/insightskuapp/migrations/0009_alter_product_client.py
+InsightSKU_ENV/pyvenv.cfg
+InsightSKU_ENV/Scripts/activate
+InsightSKU_ENV/Scripts/activate.bat
+InsightSKU_ENV/Scripts/Activate.ps1
+InsightSKU_ENV/Scripts/deactivate.bat
