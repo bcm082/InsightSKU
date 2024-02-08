@@ -1,10 +1,16 @@
-from django.shortcuts import render, redirect
-from .forms import ClientNameForm, ProductForm
-from .models import Client, UserProfile, Product
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import ClientNameForm, ProductForm, TagForm
+from .models import Client, UserProfile, Product, Tag
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
+
+
+
 
 
 
@@ -96,3 +102,33 @@ def add_product(request):
         form = ProductForm()
 
     return render(request, 'add_product.html', {'form': form})
+
+# Tags Functionality
+
+# Display list of tags
+class TagListView(ListView):
+    model = Tag
+    context_object_name = 'tags'
+    template_name = 'tags/tag_list.html'
+
+# Add a new tag
+class TagCreateView(CreateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'tags/tag_form.html'
+    success_url = reverse_lazy('tag-list')
+
+# Edit an existing tag
+class TagUpdateView(UpdateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'tags/tag_form.html'
+    success_url = reverse_lazy('tag-list')
+
+# Delete a tag
+def tag_delete(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    if request.method == 'POST':
+        tag.delete()
+        return redirect('tag-list')
+    return render(request, 'tags/tag_confirm_delete.html', {'object': tag})
