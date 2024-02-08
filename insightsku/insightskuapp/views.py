@@ -91,16 +91,21 @@ def advanced_product_search(request):
     # Add your advanced search logic here
     return render(request, 'advanced_search.html')
 
+@login_required
 def add_product(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            # You can add a success message here if needed
-            return redirect('products')  # Redirect to a product list view after adding
+            product = form.save(commit=False)
+            # Fetch the client from the logged-in user's UserProfile
+            user_profile = UserProfile.objects.get(user=request.user)
+            product.client = user_profile.client
+            product.save()
+            form.save_m2m()  # Important for saving ManyToMany relationships, such as tags
+            # Redirect to a new URL:
+            return redirect('products')
     else:
         form = ProductForm()
-
     return render(request, 'add_product.html', {'form': form})
 
 # Tags Functionality
